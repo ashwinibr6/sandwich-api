@@ -20,6 +20,9 @@ public class SandwichControllerTest {
     @Autowired
     MockMvc mvc;
 
+    @Autowired
+    SandwichRepository sandwichRepository;
+
     @Test
     void getAllSandwiches() throws Exception {
         mvc.perform(get("/sandwiches"))
@@ -33,7 +36,7 @@ public class SandwichControllerTest {
     @Test
     void AddSandwich() throws Exception {
         Sandwich chickenClub = new Sandwich();
-        chickenClub.setName("Chicken Club");
+        chickenClub.setName("Postgres Sammy");
 
         mvc.perform(
             post("/sandwiches")
@@ -44,7 +47,7 @@ public class SandwichControllerTest {
 
         mvc.perform(get("/sandwiches"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$", hasSize(5)))
-            .andExpect(jsonPath("[4].name").value("Chicken Club"));
+            .andExpect(jsonPath("$", hasSize(2)))
+            .andExpect(jsonPath("[1].name").value("Postgres Sammy"));
     }
 }
