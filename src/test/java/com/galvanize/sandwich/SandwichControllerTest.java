@@ -47,7 +47,7 @@ public class SandwichControllerTest {
 
         mvc.perform(get("/sandwiches"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$", hasSize(2)))
-            .andExpect(jsonPath("[1].name").value("Postgres Sammy"));
+            .andExpect(jsonPath("$", hasSize(5)))
+            .andExpect(jsonPath("[4].name").value("Postgres Sammy"));
     }
 }
